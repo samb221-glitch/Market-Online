@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+  <!-- Empêcher l'indexation par les moteurs de recherche -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+
+<!-- Sécurité supplémentaire : empêcher l'affichage dans un iframe -->
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
+<!-- Prévention du sniffing de type MIME -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - SambStore</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"/>
+  <style>
+    body{background:#f8f9fa;padding-top:20px}
+    .card{box-shadow:0 2px 10px rgba(0,0,0,0.1);border:none}
+    .upload-area{border:2px dashed #adb5bd;border-radius:12px;padding:40px 20px;text-align:center;background:#fff;cursor:pointer;transition:all 0.3s;display:block;width:100%}
+    .upload-area:hover,.upload-area.dragover{border-color:#0d6efd;background:#f0f7ff}
+    #uploadPrompt{display:block}
+    #uploadPrompt.hidden{display:none}
+    .preview-img{max-width:180px;max-height:180px;object-fit:cover;border-radius:8px;border:1px solid #dee2e6}
+  </style>
+</head>
+<body>
+  <div class="container" style="max-width:900px">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3><i class="bi bi-gear-fill"></i> Gestion des Produits</h3>
+      <a href="index.html" class="btn btn-outline-secondary">← Retour au site</a>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white"><i class="bi bi-plus-circle"></i> <span id="formTitle">Ajouter un produit</span></div>
+      <div class="card-body">
+        <form id="adminForm">
+          <input type="hidden" id="editId" value="">
+          <div class="mb-3">
+            <label class="form-label fw-bold">Image du produit</label>
+            <label for="imageInput" class="upload-area" id="dropZone">
+              <div id="uploadPrompt"><i class="bi bi-cloud-upload display-4 text-muted"></i><p class="mb-1 mt-2 fw-bold">Cliquez ici ou glissez une image</p><small class="text-muted">JPG, PNG, WebP • Max 5 Mo</small></div>
+              <input type="file" id="imageInput" accept="image/*" style="display:none">
+            </label>
+            <div id="imagePreview" class="mt-3 text-center"></div>
+            <input type="hidden" id="imageBase64" value="">
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">Nom du produit *</label><input type="text" class="form-control" id="pName" required></div>
+            <div class="col-md-3"><label class="form-label">Catégorie *</label><select class="form-select" id="pCat" required><option value="homme">Homme</option><option value="femme">Femme</option><option value="mixte">Mixte</option><option value="enfants">Enfants</option><option value="maillot">Maillot</option></select></div>
+            <div class="col-md-3"><label class="form-label">Prix (FCFA) *</label><input type="number" class="form-control" id="pPrice" min="100" required></div>
+            <div class="col-12"><label class="form-label">Description</label><textarea class="form-control" id="pDesc" rows="2"></textarea></div>
+            <div class="col-md-12"><label class="form-label">Tailles disponibles *</label><input type="text" class="form-control" id="pSizes" placeholder="S, M, L, XL" required><small class="text-muted">Séparez les tailles par des virgules</small></div>
+            <div class="col-md-12"><label class="form-label">Couleurs disponibles <span class="text-muted">(facultatif)</span></label><input type="text" class="form-control" id="pColors" placeholder="Ex: Noir, Blanc, Bleu, Rouge"><small class="text-muted">Séparez les couleurs par des virgules (optionnel)</small></div>
+          </div>
+          <div class="mt-3 d-flex gap-2">
+            <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Enregistrer</button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()"><i class="bi bi-x-lg"></i> Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-list-ul"></i> Produits existants</span>
+        <button id="exportBtn" class="btn btn-sm btn-light"><i class="bi bi-file-earmark-code"></i> 📥 Exporter products.json</button>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="bg-light"><tr><th>Image</th><th>Produit</th><th>Catégorie</th><th>Prix</th><th style="width:100px">Actions</th></tr></thead>
+            <tbody id="prodTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info mt-3 mb-4"><i class="bi bi-info-circle"></i> <strong>Comment sauvegarder :</strong> Cliquez sur "📥 Exporter" → Copiez le texte → Collez dans le Bloc-notes → Enregistrez sous <code>products.json</code> → Remplacez l'ancien fichier.</div>
+  </div>
+
+  <!-- MODAL D'EXPORT (Fonctionne 100% du temps) -->
+  <div class="modal fade" id="exportModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title"><i class="bi bi-check-circle"></i> Fichier prêt à être enregistré</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-2">1️⃣ Cliquez sur <strong>"Copier le JSON"</strong></p>
+          <p class="mb-2">2️⃣ Ouvrez le <strong>Bloc-notes</strong> (ou TextEdit sur Mac)</p>
+          <p class="mb-2">3️⃣ Collez le texte (<code>Ctrl+V</code> ou <code>Cmd+V</code>)</p>
+          <p class="mb-3">4️⃣ Fichier → Enregistrer sous → Nommez-le <code>products.json</code> (Type: <strong>Tous les fichiers (*.*)</strong>)</p>
+          <textarea id="jsonOutput" class="form-control font-monospace" rows="12" readonly></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="copyBtn"><i class="bi bi-clipboard"></i> Copier le JSON</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

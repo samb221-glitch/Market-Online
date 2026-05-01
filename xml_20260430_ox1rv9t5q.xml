@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="https://www.w3.org/1999/xhtml"
+        xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Page d'accueil (priorité max) -->
+  <url>
+    <loc>https://sambstore.sn/</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://sambstore.sn/images/og-image.jpg</image:loc>
+      <image:caption>SambStore - Vêtements et maillots à Dakar</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Pages ancres (si tu veux les référencer séparément) -->
+  <url>
+    <loc>https://sambstore.sn/#products</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://sambstore.sn/#contact</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Page admin : EXCLURE (noindex déjà mis) -->
+  <!-- Ne pas l'ajouter ici ! -->
+
+</urlset>

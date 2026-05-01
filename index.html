@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SambStore - Vêtements & Maillots à Dakar</title>
+  <!-- À ajouter dans <head>, juste après le title -->
+<meta name="description" content="SambStore : vêtements homme, femme, enfants et maillots de foot à Dakar. Livraison rapide à Dakar Ville & Banlieue. Commandez en ligne ou via WhatsApp.">
+<!-- Dans <head>, avant les liens CSS/JS -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Icônes -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+  <!-- CSS personnalisé -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 🔔 Barre de navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#home">
+        <i class="bi bi-bag-heart-fill text-danger"></i> SambStore
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#products">Produits</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item">
+            <a class="nav-link position-relative" href="#cartModal" data-bs-toggle="modal">
+              <i class="bi bi-cart3"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">0</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🎯 Section Accueil animée -->
+  <section id="home" class="hero-section d-flex align-items-center text-center text-white">
+    <div class="container">
+      <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Bienvenue chez <span class="text-warning">SambStore</span></h1>
+      <p class="lead animate__animated animate__fadeInUp">Vêtements homme & femme • Maillots de clubs & sélections • Livraison partout à Dakar</p>
+      <a href="#products" class="btn btn-warning btn-lg mt-3 animate__animated animate__pulse animate__infinite">
+        <i class="bi bi-shop"></i> Découvrir nos produits
+      </a>
+    </div>
+  </section>
+
+  <!-- 🔍 Section Recherche & Filtres -->
+  <section class="py-4 bg-light">
+    <div class="container">
+      <div class="row g-3 justify-content-center">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input type="text" class="form-control" id="searchInput" placeholder="Rechercher un produit...">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <select class="form-select" id="categoryFilter">
+            <option value="all">Toutes les catégories</option>
+            <option value="homme">👨 Homme</option>
+            <option value="femme">👩 Femme</option>
+            <option value="mixte">🧑‍🤝‍🧑 Mixte</option>
+            <option value="enfants">🧒 Enfants</option>
+            <option value="maillot">⚽ Maillots</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🛍️ Section Produits -->
+  <section id="products" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4 fw-bold">Nos Produits</h2>
+      <div id="pageAlert"></div>
+      <div class="row g-4" id="productsContainer">
+        <!-- Les produits seront injectés ici par JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 🚚 Section Livraison -->
+  <section class="py-4 bg-primary text-white">
+    <div class="container text-center">
+      <h4><i class="bi bi-truck"></i> Livraison à Dakar</h4>
+      <p class="mb-0">
+        <strong>Dakar Banlieue :</strong> 2 000 FCFA •
+        <strong>Dakar Ville :</strong> 3 000 FCFA •
+        <strong>Retrait :</strong> Gratuit (sur rendez-vous)
+      </p>
+    </div>
+  </section>
+
+  <!-- 📞 Section Contact -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4 fw-bold">Nous Contacter</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card shadow h-100">
+            <div class="card-body">
+              <h5><i class="bi bi-telephone-fill text-primary"></i> Téléphones</h5>
+              <p class="mb-1">📱 70 344 78 18</p>
+              <p class="mb-3">📞 70 477 66 42 <small class="text-muted">(Service commercial)</small></p>
+
+              <h5><i class="bi bi-envelope-fill text-primary"></i> Email</h5>
+              <p><a href="mailto:sambmansour10@gmail.com">sambmansour10@gmail.com</a></p>
+
+              <h5><i class="bi bi-geo-alt-fill text-primary"></i> Retrait</h5>
+              <p>Rencontre ou livraison à la porte sur Dakar</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <form id="contactForm" class="card shadow p-3">
+            <div class="mb-3">
+              <label class="form-label">Nom complet</label>
+              <input type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Téléphone</label>
+              <input type="tel" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-send"></i> Envoyer ma demande
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🛒 Modal Panier -->
+  <div class="modal fade" id="cartModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-dark text-white">
+          <h5 class="modal-title"><i class="bi bi-cart-check"></i> Votre Panier</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <strong id="cartSectionCount">0 article</strong>
+          </div>
+          <div id="cartSectionItems" class="mb-4">
+            <p class="text-muted">Votre panier est vide pour l'instant. Ajoutez des produits au magasin.</p>
+          </div>
+
+          <div class="mb-4">
+            <h6 class="fw-bold">Infos de livraison</h6>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Nom complet</label>
+                <input type="text" class="form-control" id="custName" placeholder="Ex: Mansour Samb" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Téléphone</label>
+                <input type="tel" class="form-control" id="custPhone" placeholder="Ex: 77 123 45 67" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Adresse / Quartier</label>
+                <input type="text" class="form-control" id="custLocation" placeholder="Ex: Dakar Plateau" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email (facultatif)</label>
+                <input type="email" class="form-control" id="custEmail" placeholder="Ex: example@mail.com" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="w-100">
+            <div class="mb-3">
+              <label class="form-label fw-bold">Zone de livraison</label>
+              <select class="form-select" id="deliveryZone">
+                <option value="none">-- Choisir --</option>
+                <option value="banlieue">Dakar Banlieue (+2 000 FCFA)</option>
+                <option value="ville">Dakar Ville (+3 000 FCFA)</option>
+                <option value="pickup">Retrait sur place (Gratuit)</option>
+              </select>
+            </div>
+            <div class="mb-2 d-flex justify-content-between">
+              <span>Sous-total :</span>
+              <strong id="cartSubtotal">0 FCFA</strong>
+            </div>
+            <div class="mb-3 d-flex justify-content-between">
+              <span>Livraison :</span>
+              <strong id="cartDelivery">0 FCFA</strong>
+            </div>
+            <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+              <span>Total :</span>
+              <strong id="cartTotal">0 FCFA</strong>
+            </div>
+            <div class="d-grid gap-2">
+              <a href="#" class="btn btn-primary btn-lg" id="wavePayBtn" target="_blank">Payer avec Wave</a>
+              <button class="btn btn-success btn-lg" id="checkoutBtn">
+                <i class="bi bi-whatsapp"></i> Commander via WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p class="mb-0">&copy; 2024 SambStore - Tous droits réservés</p>
+    <small>Créé avec ❤️ pour Dakar</small>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

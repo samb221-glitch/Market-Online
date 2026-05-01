@@ -1,0 +1,136 @@
+/* === Hero Section Animée === */
+.hero-section {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 80vh;
+  padding-top: 70px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+  top: 20%;
+  right: 10%;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(220,53,69,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+  bottom: 15%;
+  left: 15%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.1); }
+}
+
+/* === Cartes Produits === */
+.product-card {
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.product-card img {
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+.size-btn {
+  margin: 2px;
+  transition: all 0.2s;
+}
+
+.size-btn:hover, .size-btn.active {
+  background-color: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+/* === Animations au scroll === */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Boutons === */
+.btn-add-cart {
+  transition: all 0.2s;
+}
+
+.btn-add-cart:hover {
+  transform: scale(1.05);
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+}
+/* Formulaire client dans le panier */
+#customerForm .form-control, #customerForm .form-select {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s;
+}
+#customerForm .form-control:focus, #customerForm .form-select:focus {
+  background-color: #fff;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.15);
+}
+
+/* Boutons de paiement */
+#wavePayBtn {
+  background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+  border: none;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#wavePayBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(21,101,192,0.4);
+}
+#whatsappBtn {
+  border-color: #25D366;
+  color: #25D366;
+}
+#whatsappBtn:hover {
+  background-color: #25D366;
+  color: white;
+}
+
+/* Responsive formulaire */
+@media (max-width: 576px) {
+  #customerForm .row > div { flex: 0 0 100%; max-width: 100%; }
+}
