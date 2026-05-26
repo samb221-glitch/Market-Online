@@ -10,8 +10,8 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://sambstore.sn/images/og-image.jpg</image:loc>
-      <image:caption>SambStore - Vêtements et maillots à Dakar</image:caption>
+      <image:loc>https://market-online.sn/images/og-image.jpg</image:loc>
+      <image:caption>Market-Online - Vêtements et maillots à Dakar</image:caption>
     </image:image>
   </url>
 
@@ -24,7 +24,7 @@
   </url>
 
   <url>
-    <loc>https://sambstore.sn/#contact</loc>
+    <loc>https://mSarket-online.sn/#contact</loc>
     <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
