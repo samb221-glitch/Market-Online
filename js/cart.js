@@ -85,7 +85,7 @@ window.removeItem = index => {
 
 function getDeliveryFee() {
   const zone = document.getElementById('deliveryZone')?.value;
-  return zone === 'banlieue' ? 2000 : zone === 'ville' ? 3000 : 0;
+  return zone === 'banlieue' ? 1000 : zone === 'ville' ? 2000 : 0;
 }
 
 function renderSummary() {
